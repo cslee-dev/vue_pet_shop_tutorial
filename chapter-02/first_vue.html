@@ -24,7 +24,7 @@
                 <h1>{{product.title}}</h1>
                 <p v-html="product.description"></p>
                 <p class="price">{{product.price | formatPrice}}</p>
-                <button class="btn btn-primary btn-lg" @click="addToCart">장바구니 담기</button>
+                <button class="btn btn-primary btn-lg" @click="addToCart">장바구니 담기 갯수 {{cartCount}}</button>
             </div>
         </div>
     </main>
@@ -43,6 +43,11 @@
     let APP_LOG_LIFECYCLE_EVENTS = false; // 콜백을 사용 또는 중지하는데 사용되는 변수입니다.
     let webstore = new Vue({
         el: "#app",
+        computed: {
+            cartCount() {
+                return this.cart.length + "개";
+            }
+        },
         filters: {
             formatPrice(price) {
                 if (!parseInt(price)) {
