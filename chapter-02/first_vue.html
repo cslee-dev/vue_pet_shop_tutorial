@@ -23,7 +23,7 @@
             <div class="col-md-6  description">
                 <h1 v-text="product.title"></h1>
                 <p v-html="product.description"></p>
-                <p v-text="product.price" class="price"></p>
+                <p class="price">{{product.price | formatPrice}}</p>
             </div>
         </div>
     </main>
@@ -39,9 +39,28 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
-    let APP_LOG_LIFECYCLE_EVENTS = true; // 콜백을 사용 또는 중지하는데 사용되는 변수입니다.
+    let APP_LOG_LIFECYCLE_EVENTS = false; // 콜백을 사용 또는 중지하는데 사용되는 변수입니다.
     let webstore = new Vue({
         el: "#app",
+        filters: {
+            formatPrice(price) {
+                if (!parseInt(price)) {
+                    return "";
+                }
+                if (price > 99999) {
+                    var priceString = (price / 100).toFixed(2);
+                    var priceArray = priceString.split("").reverse();
+                    var index = 3;
+                    while (priceArray.length > index + 3) {
+                        priceArray.splice(index + 3, 0, ",");
+                        index += 4;
+                    }
+                    return "$" + priceArray.reverse().join("");
+                } else {
+                    return "$" + (price / 100).toFixed(2);
+                }
+            }
+        },
         data: {
             sitemap: "Vue.js 애완용품샵",
             product: {
