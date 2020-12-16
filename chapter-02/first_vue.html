@@ -9,7 +9,11 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <header>
+        <h1>{{sitemap}}</h1>
+    </header>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -21,8 +25,47 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
-    const webstore = new Vue({
+    let APP_LOG_LIFECYCLE_EVENTS = true; // 콜백을 사용 또는 중지하는데 사용되는 변수입니다.
+    let webstore = new Vue({
         el: "#app",
+        data: {
+            sitemap: "Vue.js 애완용품샵",
+        },
+        beforeCreate() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("beforeCreate"); // 생성 전 이벤트 로그
+            }
+        },
+        created() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("created"); // 생성 후 이벤트 로그
+            }
+        },
+        beforeMount() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("beforeMount"); // 마운트 전 이벤트 로그
+            }
+        },
+        mounted() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("mounted"); // 마운트 후 이벤트 로그
+            }
+        },
+        beforeUpdate() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("beforeUpdate"); // 업데이트전 이벤트 로그
+            }
+        },
+        updated() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("updated") // 업데이트 후 이벤트 로그
+            }
+        },
+        destroyed() {
+            if (APP_LOG_LIFECYCLE_EVENTS) {
+                console.log("destroyed"); // 소멸 후 이벤트 로그
+            }
+        }
     });
 
 </script>
