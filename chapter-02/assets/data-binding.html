@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Vue.js 애완용품샵</title>
@@ -9,7 +9,11 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <header>
+        <h1 v-text="sitename"></h1>
+    </header>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -23,6 +27,9 @@
 <script type="text/javascript">
     const webstore = new Vue({
         el: "#app",
+        data: {
+            sitename: 'Vue.js 애완용품샵'
+        }
     });
 
 </script>
