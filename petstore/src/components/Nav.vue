@@ -7,7 +7,7 @@
         </h1>
       </div>
       <div class="nav navbar-nav navbar-right cart">
-        <router-link :to="{name: 'Form'}" tag="button" class="btn btn-default btn-lg">
+        <router-link :to="{name: 'Form'}" tag="button" class="btn btn-default btn-lg" active-class="active">
           <span class="glyphicon glyphicon-shopping-cart">{{ cartItemCount }}</span>
           체크아웃
         </router-link>
