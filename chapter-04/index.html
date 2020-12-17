@@ -67,10 +67,10 @@
                     <div class="col-3 mb-3">
                         <select v-model="order.state" class="form-select" aria-label="Default select example">
                             <option disabled value="">State</option>
-                            <option value="1">AL</option>
-                            <option value="2">AR</option>
-                            <option value="3">CA</option>
-                            <option value="4">NV</option>
+                            <option :value="states.AL">AL</option>
+                            <option :value="states.AR">AR</option>
+                            <option :value="states.CA">CA</option>
+                            <option :value="states.NV">NV</option>
                         </select>
                     </div>
                     <div class="col-9">
@@ -90,13 +90,15 @@
                     </div>
                     <div class="col-6">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="method" id="home" :value="order.home" v-model="order.method">
+                            <input class="form-check-input" type="radio" name="method" id="home" :value="order.home"
+                                   v-model="order.method">
                             <label class="form-check-label" for="home">
                                 자택
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="method" id="business" :value="order.business" v-model="order.method">
+                            <input class="form-check-input" type="radio" name="method" id="business"
+                                   :value="order.business" v-model="order.method">
                             <label class="form-check-label" for="business">
                                 직장
                             </label>
@@ -180,13 +182,19 @@
                 city: '',
                 zip: '',
                 state: '',
-                gift:"선물로 보내기",
+                gift: "선물로 보내기",
                 method: '자택',
-                sendGift : '선물로 보내기',
+                sendGift: '선물로 보내기',
                 dontSendGift: "선물로 보내지 않기",
-                home : "자택 주소",
-                business : "직장 주소"
+                home: "자택 주소",
+                business: "직장 주소"
             },
+            states: {
+                AL: "알라바마",
+                AR: "애리조나",
+                CA: "캘리포니아",
+                NV: "네바다",
+            }
         },
         methods: {
             addToCart() {
@@ -195,7 +203,7 @@
             showCheckout() {
                 this.showProduct = !this.showProduct;
             },
-            submitForm(){
+            submitForm() {
                 window.alert("제출 완료");
             }
         },
