@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-3 mb-3">
                         <select v-model="order.state" class="form-select" aria-label="Default select example">
-                            <option selected>주</option>
+                            <option disabled value="">State</option>
                             <option value="1">AL</option>
                             <option value="2">AR</option>
                             <option value="3">CA</option>
@@ -79,7 +79,10 @@
                     </div>
                     <div class="col-6">
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" value="true" v-model="order.gift" id="gift" checked>
+                            <input class="form-check-input" type="checkbox" value="true" v-model="order.gift" id="gift"
+                                   :true-value="order.sendGift"
+                                   :false-value="order.dontSendGift"
+                                   checked>
                             <label class="form-check-label" for="gift">
                                 선물로 보내기
                             </label>
@@ -87,32 +90,32 @@
                     </div>
                     <div class="col-6">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="method" id="home" value="Home" v-model="order.method">
+                            <input class="form-check-input" type="radio" name="method" id="home" :value="order.home" v-model="order.method">
                             <label class="form-check-label" for="home">
                                 자택
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="method" id="business" value="Business" v-model="order.method">
+                            <input class="form-check-input" type="radio" name="method" id="business" :value="order.business" v-model="order.method">
                             <label class="form-check-label" for="business">
                                 직장
                             </label>
                         </div>
                     </div>
-                    <div class="col d-flex justify-content-center">
+                    <div class="col d-flex justify-content-start">
                         <button type="submit" class="btn btn-primary mb-3 submit" @click="submitForm">주문하기</button>
                     </div>
                 </div>
                 <div class="highlight verify">
-                    <ul>
-                        <li>이름 : {{order.firstName}}</li>
-                        <li>성 : {{order.lastName}}</li>
-                        <li>주소 : {{order.address}}</li>
-                        <li>도시 : {{order.city}}</li>
-                        <li>우편번호 : {{order.zip}}</li>
-                        <li>주 : {{order.state}}</li>
-                        <li>주소지 : {{order.method}}</li>
-                        <li>선물 : {{order.gift}}</li>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">이름 : {{order.firstName}}</li>
+                        <li class="list-group-item">성 : {{order.lastName}}</li>
+                        <li class="list-group-item">주소 : {{order.address}}</li>
+                        <li class="list-group-item">도시 : {{order.city}}</li>
+                        <li class="list-group-item">우편번호 : {{order.zip}}</li>
+                        <li class="list-group-item">주 : {{order.state}}</li>
+                        <li class="list-group-item">주소지 : {{order.method}}</li>
+                        <li class="list-group-item">선물 : {{order.gift}}</li>
                     </ul>
                 </div>
             </div>
@@ -177,8 +180,12 @@
                 city: '',
                 zip: '',
                 state: '',
-                gift:true,
-                method: 'Home',
+                gift:"선물로 보내기",
+                method: '자택',
+                sendGift : '선물로 보내기',
+                dontSendGift: "선물로 보내지 않기",
+                home : "자택 주소",
+                business : "직장 주소"
             },
         },
         methods: {
