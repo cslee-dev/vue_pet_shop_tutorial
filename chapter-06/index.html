@@ -19,17 +19,22 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
-    Vue.component('my-component',{
+    Vue.component('my-component', {
         template: "<div>{{message}}</div>",
-        data(){
+        data() {
             return {
-                message : "전역"
+                message: "전역"
             }
         }
     })
-
+    const Component = {
+        template: '<div>안녕 난 지역 컴포넌트라고해</div>'
+    }
     var app = new Vue({
-        el : "#app"
+        el: "#app",
+        components: {
+            myComponent: Component
+        }
     })
 </script>
 </body>
