@@ -15,7 +15,9 @@
     <counter-component :count="count"></counter-component>
     <counter-component :count="count"></counter-component>
     <button class="btn btn-primary" type="button" @click="countUp">카운트 업</button>
-    <type-valid-Component :num="myNumber" :str="passedString" :even="myNumber" :obj="passedObject"></type-valid-Component>
+    <type-valid-Component :num="myNumber" :str="passedString" :even="myNumber"
+                          :obj="passedObject"></type-valid-Component>
+    <child-btn-counter @parent-count-up="countUp"></child-btn-counter>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
         integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
@@ -40,7 +42,15 @@
         template: '<div>{{count}}</div>',
         props: ['count']
     }
-
+    const ChildBtnCounter = {
+        template: '<button type="button" @click="countBtnClickListener">카운팅</button>',
+        methods:{
+            countBtnClickListener(){
+                console.log("listen");
+                this.$emit('parent-count-up');
+            }
+        }
+    }
     const TypeValidComponent = {
         template: '<div>숫자 : {{num}} <br/> 문자열:{{str}}<br/>짝수?: {{even}}<br/>객체: {{obj.message}}</div>',
         props: {
@@ -55,11 +65,12 @@
             even: {
                 validator: (value) => {
                     return (value % 2 === 0)
-                }},
-            obj :{
-                type:Object,
-                default: () =>{
-                    return { message: '안녕, 객체로부터'}
+                }
+            },
+            obj: {
+                type: Object,
+                default: () => {
+                    return {message: '안녕, 객체로부터'}
                 }
             }
         }
@@ -70,16 +81,18 @@
             message: "동조",
             count: 0,
             passedString: "안녕, 부모로부터!",
-            myNumber : 42,
-            passedObject: {message : '넘겨준 객체'}
+            myNumber: 42,
+            passedObject: {message: '넘겨준 객체'}
         },
         components: {
             myComponent: Component,
             CounterComponent: CounterComponent,
-            TypeValidComponent:TypeValidComponent,
+            TypeValidComponent: TypeValidComponent,
+            ChildBtnCounter: ChildBtnCounter,
         },
         methods: {
             countUp() {
+                console.log("??");
                 this.count++;
             }
         }
