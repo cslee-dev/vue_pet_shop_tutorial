@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div id="app">
+    <form-component>
+        <h1>{{header}}</h1>
+        <label for="title" slot="titleSlot">{{titleLabel}}</label>
+        <label for="author" slot="authorSlot">{{authorLabel}}</label>
+    </form-component>
+
+    <book-component :books="books">
+        <h1 slot="header">{{ header }}</h1>
+        <template v-slot:book="props">
+            <h2>
+                <i>{{props.book.title}}</i>
+                <small>by: {{props.book.author}}</small>
+            </h2>
+        </template>
+    </book-component>
+</div>
+<script>
+    const FormComponent = {
+        template: `
+          <div>
+          <form>
+            <slot></slot>
+            <slot name="titleSlot"></slot>
+            <input id="title" type="text"/><br/>
+            <slot name="authorSlot"></slot>
+            <input id="author" type="text"/><br/>
+            <button>제출하기</button>
+          </form>
+          </div>
+        `,
+        props: ['title', 'author']
+    }
+
+    const BookComponent = {
+        template: `
+            <div>
+                <slot name="header"></slot>
+                <slot name="book" v-for="book in books" :book="book"></slot>
+            </div>
+        `,
+        props:['books']
+    }
+    new Vue({
+        el: '#app',
+        components: {'form-component': FormComponent, 'book-component': BookComponent},
+        data() {
+            return {
+                titleLabel: '제목:',
+                authorLabel: '저자:',
+                pageLength: '',
+                header: "책 저자 폼",
+                books: [
+                    {author: "이", title: '책제목'},
+                    {author: "이", title: 'ㄱ'},
+                    {author: "이", title: 'ㄱ'},
+                ]
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
