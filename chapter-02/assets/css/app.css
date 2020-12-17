@@ -28,3 +28,8 @@ body {
     font-size: 150%;
     margin-top: 50px;
 }
+
+.inventory-message{
+    text-align:center;
+    font-weight: bold;
+}
