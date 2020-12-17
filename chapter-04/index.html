@@ -46,21 +46,21 @@
             <div class="row col-12" v-else>
                 <div class="row mb-3">
                     <div class="col mb-3">
-                        <input type="text" v-model="order.firstName" class="form-control" placeholder="First name"
+                        <input type="text" v-model.trim="order.firstName" class="form-control" placeholder="First name"
                                aria-label="First name">
                     </div>
                     <div class="col">
-                        <input type="text" v-model="order.lastName" class="form-control" placeholder="Last name"
+                        <input type="text" v-model.trim="order.lastName" class="form-control" placeholder="Last name"
                                aria-label="Last name">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" v-model="order.address" class="form-control" placeholder="Address"
+                        <input type="text" v-model.trim="order.address" class="form-control" placeholder="Address"
                                aria-label="Address"
                                aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" v-model="order.city" class="form-control" placeholder="City"
+                        <input type="text" v-model.trim="order.city" class="form-control" placeholder="City"
                                aria-label="City"
                                aria-describedby="basic-addon1">
                     </div>
@@ -71,7 +71,7 @@
                         </select>
                     </div>
                     <div class="col-9">
-                        <input type="text" v-model="order.zip" class="form-control" placeholder="Zip" aria-label="Zip"
+                        <input type="number" v-model.number="order.zip" class="form-control" placeholder="Zip" aria-label="Zip"
                                aria-describedby="basic-addon1">
                     </div>
                     <div class="col-6">
