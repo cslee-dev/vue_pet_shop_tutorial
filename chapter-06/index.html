@@ -10,7 +10,12 @@
 </head>
 <body>
 <div id="app">
-    <my-component></my-component>
+    <my-component :message="message"></my-component>
+    <counter-component :count="count"></counter-component>
+    <counter-component :count="count"></counter-component>
+    <counter-component :count="count"></counter-component>
+    <button class="btn btn-primary" type="button" @click="countUp">카운트 업</button>
+    <type-valid-Component :num="myNumber" :str="passedString" :even="myNumber" :obj="passedObject"></type-valid-Component>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
         integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
@@ -28,12 +33,55 @@
         }
     })
     const Component = {
-        template: '<div>안녕 난 지역 컴포넌트라고해</div>'
+        template: '<div>안녕 난 지역 컴포넌트라고해 {{message}}</div>',
+        props: ['message'],
+    }
+    const CounterComponent = {
+        template: '<div>{{count}}</div>',
+        props: ['count']
+    }
+
+    const TypeValidComponent = {
+        template: '<div>숫자 : {{num}} <br/> 문자열:{{str}}<br/>짝수?: {{even}}<br/>객체: {{obj.message}}</div>',
+        props: {
+            num: {
+                type: Number,
+                required: true
+            },
+            str: {
+                type: String,
+                default: "안녕"
+            },
+            even: {
+                validator: (value) => {
+                    return (value % 2 === 0)
+                }},
+            obj :{
+                type:Object,
+                default: () =>{
+                    return { message: '안녕, 객체로부터'}
+                }
+            }
+        }
     }
     var app = new Vue({
         el: "#app",
+        data: {
+            message: "동조",
+            count: 0,
+            passedString: "안녕, 부모로부터!",
+            myNumber : 42,
+            passedObject: {message : '넘겨준 객체'}
+        },
         components: {
-            myComponent: Component
+            myComponent: Component,
+            CounterComponent: CounterComponent,
+            TypeValidComponent:TypeValidComponent,
+        },
+        methods: {
+            countUp() {
+                this.count++;
+            }
         }
     })
 </script>
