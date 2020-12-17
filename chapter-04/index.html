@@ -67,10 +67,7 @@
                     <div class="col-3 mb-3">
                         <select v-model="order.state" class="form-select" aria-label="Default select example">
                             <option disabled value="">State</option>
-                            <option :value="states.AL">AL</option>
-                            <option :value="states.AR">AR</option>
-                            <option :value="states.CA">CA</option>
-                            <option :value="states.NV">NV</option>
+                            <option v-for="(state, key) in states" :value="state">{{key}}</option>
                         </select>
                     </div>
                     <div class="col-9">
