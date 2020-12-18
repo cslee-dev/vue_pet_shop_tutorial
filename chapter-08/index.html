@@ -3,38 +3,71 @@
 <head>
     <script src="https://unpkg.com/vue"></script>
     <style>
-        .fade-enter-active, .fade-leave-active {
-            transition: opacity 1.5s ease-out;
+        .component-fade-enter-active, .component-fade-leave-active {
+            transition: opacity 2.0s ease;
         }
 
-        .fade-enter, .fade-leave-to {
+        .component-fade-enter, .component-fade-leave-to {
             opacity: 0;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body>
 <div id="app">
-    <div @click="show = !show">
-        <h2>{{title}}</h2>
-    </div>
-
-    <transition name="fade">
-        <div v-if="show">
-            <h1>{{description}}</h1>
-        </div>
+    <button type="button" @click="cycle">
+        순환
+    </button>
+    <transition name="component-fade" mode="out-in">
+        <component :is="currentView"></component>
     </transition>
 </div>
 <script>
+    const BookComponent = {
+        template: '<div>book</div>'
+    }
+    const FormComponent = {
+        template: '<div>Form</div>'
+    }
+    const HeaderComponent = {
+        template: '<div>Header</div>'
+    }
+
     const app = new Vue({
         el: "#app",
         data() {
             return {
-                title: '전쟁 그리고 평화',
-                description: '설명 부분입니다.',
-                show: false
+                currentView: BookComponent
+            }
+        },
+        components: {
+            BookComponent,
+            FormComponent,
+            HeaderComponent,
+        },
+
+        methods: {
+            cycle(){
+                if(this.currentView === HeaderComponent){
+                    this.currentView=BookComponent
+                }else{
+                    this.currentView = this.currentView === BookComponent ? FormComponent : HeaderComponent
+                }
             }
         }
     })
 </script>
 </body>
-</html>
